@@ -20,4 +20,23 @@ export class HashidService {
     isValidId(hashid: string) {
         return this.options.hashids.isValidId(hashid)
     }
+
+    encodeEntity(data: unknown) {
+        if (typeof data === 'bigint') {
+            return this.encode(data)
+        }
+        if (typeof data === 'object') {
+            if (Array.isArray(data)) {
+                for (let i = 0; i < data.length; i++) {
+                    data[i] = this.encodeEntity(data[i])
+                }
+                return data
+            }
+            for (const k in data) {
+                data[k] = this.encodeEntity(data[k])
+            }
+            return data
+        }
+        return data
+    }
 }

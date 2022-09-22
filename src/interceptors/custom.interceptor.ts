@@ -23,9 +23,10 @@ export abstract class CustomInterceptor implements NestInterceptor {
             IGNORED_INTERCEPTORS,
             [context.getHandler(), context.getClass()]
         )
-        if (interceptors && interceptors.length > 0) {
-            return interceptors.includes(name)
-        }
-        return false
+        return (
+            interceptors &&
+            interceptors.length > 0 &&
+            interceptors.includes(name)
+        )
     }
 }
