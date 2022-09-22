@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "@hyperbolajs/nestjs-kit",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -29,6 +29,8 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
+    "@hyperbolajs/eslint-config": "^1.1.2",
+    "@hyperbolajs/prettier-config": "^1.0.0",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
@@ -67,5 +69,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "prettier": "@hyperbolajs/prettier-config",
+  "eslintConfig": {
+    "extends": "@hyperbolajs/eslint-config/ts-node"
   }
 }
