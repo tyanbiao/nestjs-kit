@@ -18,6 +18,7 @@ specifiers:
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
+  hashids: ^2.2.10
   jest: 28.1.2
   prettier: ^2.3.2
   reflect-metadata: ^0.1.13
@@ -35,6 +36,7 @@ dependencies:
   '@nestjs/common': 9.1.1_j5hagqx4mwzscud4kyjdvubauy
   '@nestjs/core': 9.1.1_rnu4wbspjtr3am5p7vy7xio2ie
   '@nestjs/platform-express': 9.1.1_xhkir6qpcnigaiptpizzepd5vm
+  hashids: 2.2.10
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.6
@@ -2754,6 +2756,10 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+
+  /hashids/2.2.10:
+    resolution: {integrity: sha512-nXnYums7F8B5Y+GSThutLPlKMaamW1yjWNZVt0WModiJfdjaDZHnhYTWblS+h1OoBx3yjwiBwxldPP3nIbFSSA==}
+    dev: false
 
   /hexoid/1.0.0:
     resolution: {integrity: sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g==}
