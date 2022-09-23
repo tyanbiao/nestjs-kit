@@ -23,7 +23,7 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   hashids: ^2.2.10
   jest: 28.1.2
-  prettier: ^2.3.2
+  prettier: ^2.7.1
   reflect-metadata: ^0.1.13
   rimraf: ^3.0.2
   rxjs: ^7.2.0

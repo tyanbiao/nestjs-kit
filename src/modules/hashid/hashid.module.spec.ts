@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { HashidModule } from './hashid.module'
 import { HashidService } from './hashid.service'
-import Hashids from 'hashids'
+import { HashidUtil } from './hashid.util'
 
 describe('HashidModuel', () => {
     let service: HashidService
@@ -12,7 +12,9 @@ describe('HashidModuel', () => {
                 HashidModule.registerAsync({
                     useFactory() {
                         return {
-                            hashids: new Hashids(),
+                            salt: 'TestingModule',
+                            alphabet: '0123456789abcdef',
+                            minLength: 6,
                         }
                     },
                 }),
@@ -26,12 +28,20 @@ describe('HashidModuel', () => {
         expect(service).toBeDefined()
     })
 
+    it('should return', () => {
+        const getHashids = jest.fn(() => HashidUtil.getHashids())
+        getHashids()
+        expect(getHashids).toReturn()
+    })
+
     it('should encode number', () => {
-        expect(service.encode(1)).toEqual(new Hashids().encode(1))
+        const id = service.encode(1)
+        console.log(id)
+        expect(id).toEqual(HashidUtil.getHashids().encode(1))
     })
 
     it('should decode a hashid', () => {
-        expect(service.decode(new Hashids().encode(1))).toEqual(1)
+        expect(service.decode(HashidUtil.getHashids().encode(1))).toEqual(1)
     })
 
     it('should be encode', () => {

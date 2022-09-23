@@ -1,5 +1,9 @@
 import Hashids from 'hashids'
 
-export interface IHashidModuleOptions {
-    hashids: Hashids
+export type IHashidModuleOptions = {
+    hashids?: Hashids
+    salt?: string
+    minLength?: number
+    alphabet?: string
+    seps?: string
 }
