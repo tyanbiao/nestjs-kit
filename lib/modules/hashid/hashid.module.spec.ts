@@ -9,7 +9,7 @@ describe('HashidModuel', () => {
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
-                HashidModule.registerAsync({
+                HashidModule.forRootAsync({
                     useFactory() {
                         return {
                             salt: 'TestingModule',
