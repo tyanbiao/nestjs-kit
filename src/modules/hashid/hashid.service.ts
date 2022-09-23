@@ -14,7 +14,7 @@ export class HashidService {
     }
 
     decode(hashid: string) {
-        return this.options.hashids.decode(hashid)
+        return this.options.hashids.decode(hashid)[0]
     }
 
     isValidId(hashid: string) {

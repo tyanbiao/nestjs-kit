@@ -31,6 +31,17 @@ describe('HashidModuel', () => {
     })
 
     it('should decode a hashid', () => {
-        expect(service.decode(new Hashids().encode(1))[0]).toEqual(1)
+        expect(service.decode(new Hashids().encode(1))).toEqual(1)
+    })
+
+    it('should be encode', () => {
+        const d = {
+            id: BigInt(12),
+            post: {
+                id: BigInt(11),
+            },
+        }
+        const encoded = service.encodeEntity(d) as any
+        expect(encoded.id).toEqual(service.encode(12))
     })
 })
