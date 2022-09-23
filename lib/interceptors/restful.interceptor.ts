@@ -6,13 +6,8 @@ import {
 } from '@nestjs/common'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { RestfullResponse } from '../utils'
 import { CustomInterceptor } from './custom.interceptor'
-
-export interface RestfullResponse<T> {
-    data: T
-    code: number
-    message: string
-}
 
 @Injectable()
 export class RestfulInterceptor<T>

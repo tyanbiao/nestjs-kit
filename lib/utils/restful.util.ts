@@ -22,3 +22,9 @@ export type RestfulObject<T = null> = {
     code: number
     message: string
 }
+
+export interface RestfullResponse<T> {
+    data: T
+    code: number
+    message: string
+}

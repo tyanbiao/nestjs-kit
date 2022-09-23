@@ -7,3 +7,5 @@ export type IHashidModuleOptions = {
     alphabet?: string
     seps?: string
 }
+
+export type NumberLike = bigint | number
