@@ -1,0 +1,42 @@
+# Base image
+FROM node:16-alpine as base
+RUN --mount=type=cache,target=/root/.npm/_cacache/  \
+    --mount=type=cache,target=/root/.local/share/pnpm/store \
+    apk add --update \
+    curl \
+    && rm -rf /var/cache/apk/* \
+    && npm --global install pnpm
+
+FROM base AS dependencies
+WORKDIR /usr/src/app
+COPY package.json pnpm-lock.yaml ./
+COPY prisma ./prisma
+RUN pnpm install --frozen-lockfile
+
+FROM base as builder
+WORKDIR /usr/src/app
+COPY . .
+COPY --from=dependencies /usr/src/app/node_modules ./node_modules
+RUN curl -sf https://gobinaries.com/tj/node-prune | sh \
+    && pnpm run build \
+    && pnpm prune --prod --no-optional \
+    && node-prune \
+    && rm -rf node_modules/rxjs/src/ \
+    && rm -rf node_modules/rxjs/dist/bundles/ \
+    && rm -rf node_modules/rxjs/dist/esm/ \
+    && rm -rf node_modules/rxjs/dist/esm5/ \
+    && rm -rf node_modules/class-validator/bundles/ \
+    && rm -rf node_modules/class-validator/esm5/ \
+    && rm -rf node_modules/class-validator/esm2015/ \
+    && rm -rf node_modules/class-transformer/bundles/ \
+    && rm -rf node_modules/class-transformer/esm5/ \
+    && rm -rf node_modules/class-transformer/esm2015/ \
+    && rm -rf node_modules/.pnpm/libphonenumber-js@*/node_modules/libphonenumber-js/bundle/ node_modules/.pnpm/libphonenumber-js@*/node_modules/libphonenumber-js/source/
+
+FROM node:16-alpine
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+# COPY --from=builder /usr/src/app/package*.json ./
+COPY --from=builder /usr/src/app/dist ./dist
+EXPOSE 3000
+CMD [ "node", "dist/main" ]
