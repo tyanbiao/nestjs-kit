@@ -13,7 +13,7 @@ export function restfulError(error: any, code = 500): RestfulObject {
     return {
         data: null,
         code,
-        message: '' + error.message || 'Internal server error',
+        message: '' + error?.message ?? 'Internal server error',
     }
 }
 
